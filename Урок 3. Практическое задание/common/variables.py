@@ -7,6 +7,7 @@ MAX_CONNECTIONS = 5                 # Максимальная очередь п
 MAX_PACKAGE_LENGTH = 1024           # Максимальная длинна сообщения в байтах
 ENCODING = 'utf-8'                  # Кодировка проекта
 LOGGING_LEVEL = logging.DEBUG       # Текущий уровень логирования
+SERVER_DATABASE = 'sqlite:///server_base.db3'   # База данных для хранения данных сервера
 
 # Прококол JIM основные ключи:
 ACTION = 'action'

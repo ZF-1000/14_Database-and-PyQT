@@ -3,18 +3,7 @@ import dis
 
 # Метакласс для проверки соответствия сервера:
 class ServerMaker(type):
-    def __init__(self, clsname, bases, clsdict):
-        # clsname - экземпляр метакласса - Server
-        # bases - кортеж базовых классов - ()
-        # clsdict - словарь атрибутов и методов экземпляра метакласса
-        # {'__module__': '__main__',
-        # '__qualname__': 'Server',
-        # 'port': <descrptrs.Port object at 0x000000DACC8F5748>,
-        # '__init__': <function Server.__init__ at 0x000000DACCE3E378>,
-        # 'init_socket': <function Server.init_socket at 0x000000DACCE3E400>,
-        # 'main_loop': <function Server.main_loop at 0x000000DACCE3E488>,
-        # 'process_message': <function Server.process_message at 0x000000DACCE3E510>,
-        # 'process_client_message': <function Server.process_client_message at 0x000000DACCE3E598>}
+    def __init__(cls, clsname, bases, clsdict):
 
         # Список методов, которые используются в функциях класса:
         methods = []
@@ -49,7 +38,7 @@ class ServerMaker(type):
                         if i.argval not in attrs:
                             # заполняем список атрибутами, использующимися в функциях класса
                             attrs.append(i.argval)
-        print(methods)
+        # print(methods)
         # Если обнаружено использование недопустимого метода connect, бросаем исключение:
         if 'connect' in methods:
             raise TypeError('Использование метода connect недопустимо в серверном классе')
@@ -62,7 +51,7 @@ class ServerMaker(type):
 
 # Метакласс для проверки корректности клиентов:
 class ClientMaker(type):
-    def __init__(self, clsname, bases, clsdict):
+    def __init__(cls, clsname, bases, clsdict):
         # Список методов, которые используются в функциях класса:
         methods = []
         for func in clsdict:

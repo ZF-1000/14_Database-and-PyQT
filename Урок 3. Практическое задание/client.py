@@ -34,19 +34,19 @@ class ClientSender(threading.Thread, metaclass=ClientMaker):
 
     # Функция запрашивает кому отправить сообщение и само сообщение, и отправляет полученные данные на сервер.
     def create_message(self):
-        to_user = input('Введите получателя сообщения: ')
+        to = input('Введите получателя сообщения: ')
         message = input('Введите сообщение для отправки: ')
         message_dict = {
             ACTION: MESSAGE,
             SENDER: self.account_name,
-            DESTINATION: to_user,
+            DESTINATION: to,
             TIME: time.time(),
             MESSAGE_TEXT: message
         }
         logger.debug(f'Сформирован словарь сообщения: {message_dict}')
         try:
             send_message(self.sock, message_dict)
-            logger.info(f'Отправлено сообщение для пользователя {to_user}')
+            logger.info(f'Отправлено сообщение для пользователя {to}')
         except:
             logger.critical('Потеряно соединение с сервером.')
             exit(1)
@@ -169,7 +169,9 @@ def main():
         print(f'Клиентский модуль запущен с именем: {client_name}')
 
     logger.info(
-        f'Запущен клиент с парамертами: адрес сервера: {server_address} , порт: {server_port}, имя пользователя: {client_name}')
+        f'Запущен клиент с парамертами: адрес сервера: {server_address}, '
+        f'порт: {server_port}, '
+        f'имя пользователя: {client_name}')
 
     # Инициализация сокета и сообщение серверу о нашем появлении
     try:
