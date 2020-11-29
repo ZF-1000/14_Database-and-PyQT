@@ -1,1 +1,0 @@
-# 14_Database-and-PyQT
